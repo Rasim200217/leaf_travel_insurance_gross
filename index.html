@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Панель управления -->
+    <div class="toolbar">
+        <div class="left">
+            <button class="btn primary" id="btnPrint">Печать / Save as PDF</button>
+            <button class="btn" id="btnDownloadHtml">Скачать HTML</button>
+            <button class="btn" id="btnReset">Сброс к образцу</button>
+        </div>
+    
+        <div class="right">
+            <div class="group" title="Можно править и прямо в документе кликом по полю">
+                <label>Номер полиса:
+                    <input type="text" id="inpPolicyNo" value="EGID 0539356">
+                </label>
+                <label>Номер договора:
+                    <input type="text" id="inpContractNo" value="GTS 0044394">
+                </label>
+            </div>
+    
+            <div class="group">
+                <label>Лого (PNG/JPG/SVG)
+                    <input type="file" id="inpLogo" accept="image/*">
+                </label>
+                <label>QR (центр)
+                    <input type="file" id="inpQrCenter" accept="image/*">
+                </label>
+                <label>QR (правый)
+                    <input type="file" id="inpQrRight" accept="image/*">
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-wrap">
+        <div class="a4" id="doc">
+            <div class="edit-hint">Подсказка: кликните по любому значению и редактируйте</div>
+    
+            <!-- Header -->
+            <div class="header">
+                <div class="titlebox">
+                    <div class="titlebar"></div>
+                    <div class="titles">
+                        <h1>Полис страхования путешествующих</h1>
+                        <div class="sub">International Travel Insurance policy</div>
+                    </div>
+                </div>
+    
+                <div class="brand">
+                    <!-- можно заменить логотип через загрузку -->
+                    <img id="imgLogo" class="logo" alt="LOGO" src="" />
+                    <div class="meta">
+                        <div>Номер полиса: <span class="" data-bind="policyNo" contenteditable="true">EGID
+                                0539356</span></div>
+                        <div class="danger">Номер договора: <span data-bind="contractNo" contenteditable="true">GTS
+                                0044394</span></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Policyholder -->
+            <div class="block">
+                <div class="block-title">Данные страхователя / Policyholder details</div>
+                <div class="grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="cell">
+                        <div class="label">Страхователь / Policyholder</div>
+                        <div class="value"><span data-id="policyholder" contenteditable="true">Crystal Bay Viet Nam</span>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Контактный номер / Contact number</div>
+                        <div class="value"><span data-id="contact" contenteditable="true">+998908300099</span></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Insured persons -->
+            <div class="block" style="margin-top:10px;">
+                <div class="block-title">Данные застрахованных лиц / Data of insured persons</div>
+    
+                <div class="grid insured-grid">
+                    <div class="cell">
+                        <div class="label">Застрахованные лица / Insured persons</div>
+                        <div class="value small">
+                            <span data-id="p1_name" contenteditable="true">1. KHAMIDULLAEV FAYZULLO</span><br>
+                            <span data-id="p2_name" contenteditable="true">2. KHAMIDULLAEV NURILLO</span>
+                        </div>
+                    </div>
+    
+                    <div class="cell">
+                        <div class="label">Дата рождения / Date of birth</div>
+                        <div class="value small">
+                            <span data-id="p1_dob" contenteditable="true">12.12.2003</span><br>
+                            <span data-id="p2_dob" contenteditable="true">05.07.2007</span>
+                        </div>
+                    </div>
+    
+                    <div class="cell">
+                        <div class="label">Детали паспорта / Passport details</div>
+                        <div class="value small">
+                            <span data-id="p1_pass" contenteditable="true">FA 8755637</span><br>
+                            <span data-id="p2_pass" contenteditable="true">FA 5973018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Terms -->
+            <div class="block" style="margin-top:10px;">
+                <div class="block-title">Условия страхования / Insurance terms</div>
+    
+                <div class="grid terms-grid">
+                    <div class="cell">
+                        <div class="label">Территория страхования / Territory of cover</div>
+                        <div class="value"><span data-id="territory" contenteditable="true">Vietnam</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Период страхования / Insurance period</div>
+                        <div class="value"><span data-id="period" contenteditable="true">c 16.12.2025 до 24.12.2025</span>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Дней / Days</div>
+                        <div class="value"><span data-id="days" contenteditable="true">9</span></div>
+                    </div>
+                </div>
+    
+                <div class="grid terms-grid-2">
+                    <div class="cell">
+                        <div class="label">Медицинские услуги / Medical services</div>
+                        <div class="value"><span data-id="medical" contenteditable="true">30 000 EUR</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Медико-транспортные услуги / Medical and transportation services</div>
+                        <div class="value"><span data-id="medTrans" contenteditable="true">33 500 EUR</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Несчастный случай / Accident insurance</div>
+                        <div class="value"><span data-id="accident" contenteditable="true">1 500 EUR</span></div>
+                    </div>
+                </div>
+    
+                <div class="grid terms-grid-3">
+                    <div class="cell">
+                        <div class="label">Общее страховое покрытие / Total sum insured</div>
+                        <div class="value"><span data-id="total" contenteditable="true">65 000 EUR</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Программа / Program</div>
+                        <div class="value"><span data-id="program" contenteditable="true">GRAND 2</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Особые условия / Special conditions</div>
+                        <div class="value"><span data-id="special" contenteditable="true">Travel</span></div>
+                    </div>
+                    <div class="cell">
+                        <div class="label">Страховая премия / Insurance premium</div>
+                        <div class="value"><span data-id="premium" contenteditable="true">Paid in full</span></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- QR row -->
+            <div class="qr-row" style="margin-top:12mm;">
+                <div class="qr-left">
+                    <div contenteditable="true" data-id="checkText">Проверьте действительность<br>договора / Check contract
+                        validity</div>
+                </div>
+    
+                <div class="qr-mid">
+                    <div class="qr-title">
+                        <div contenteditable="true" data-id="qrCenterTitle">Полис страхования путешествующих / Travel
+                            insurance policy</div>
+                    </div>
+                    <img id="imgQrCenter" class="qr-img" alt="QR Center" src="" />
+                </div>
+    
+                <div class="qr-right">
+                    <div class="url"><span contenteditable="true" data-id="site">ersp.e-osgo.uz</span></div>
+                    <img id="imgQrRight" class="qr-img" alt="QR Right" src="" />
+                </div>
+            </div>
+    
+            <!-- Footer -->
+            <div class="footer">
+                <div>Номер договора: <span data-bind="contractNo" contenteditable="true">GTS 0044394</span></div>
+                <div>Дата выдачи: <span data-id="issueDate" contenteditable="true">12.12.2025 11:12</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ===== helpers =====
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(r.result);
+                r.onerror = reject;
+                r.readAsDataURL(file);
+            });
+        }
+
+        function syncBinds() {
+            // синхронизируем все элементы с data-bind="policyNo/contractNo"
+            const policyNo = $("#inpPolicyNo").value.trim() || "POLICY";
+            const contractNo = $("#inpContractNo").value.trim() || "CONTRACT";
+            $$('[data-bind="policyNo"]').forEach(el => el.textContent = policyNo);
+            $$('[data-bind="contractNo"]').forEach(el => el.textContent = contractNo);
+            document.title = `${policyNo} insurance`;
+        }
+
+        function makeSafeFilename(s) {
+            return (s || "")
+                .replaceAll(/[\\/:*?"<>|]+/g, "_")
+                .replaceAll(/\s+/g, " ")
+                .trim();
+        }
+
+        function downloadTextFile(filename, text) {
+            const blob = new Blob([text], { type: "text/html;charset=utf-8" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }
+
+        // ===== init (если картинок нет — оставляем пусто, но рамки видны) =====
+        const placeholderLogo = `data:image/svg+xml;utf8,` + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="280" height="84">
+            <rect width="100%" height="100%" fill="white"/>
+            <text x="50%" y="58%" text-anchor="middle" font-family="Arial" font-size="28" fill="#1e4b78" font-weight="700">GROSS</text>
+          </svg>
+        `);
+        $("#imgLogo").src = placeholderLogo;
+
+        const placeholderQR = `data:image/svg+xml;utf8,` + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140">
+            <rect width="100%" height="100%" fill="white" stroke="#cfcfcf"/>
+            <text x="50%" y="54%" text-anchor="middle" font-family="Arial" font-size="14" fill="#777">QR</text>
+          </svg>
+        `);
+        $("#imgQrCenter").src = placeholderQR;
+        $("#imgQrRight").src = placeholderQR;
+
+        // ===== events =====
+        $("#inpPolicyNo").addEventListener("input", syncBinds);
+        $("#inpContractNo").addEventListener("input", syncBinds);
+
+        $("#btnPrint").addEventListener("click", () => window.print());
+
+        $("#btnDownloadHtml").addEventListener("click", () => {
+            syncBinds();
+            const policyNo = makeSafeFilename($("#inpPolicyNo").value.trim() || "POLICY");
+            const fileName = `${policyNo}_insurance.html`;
+
+            // Важно: сохраняем текущее состояние (включая contenteditable правки)
+            const html = "<!doctype html>\n" + document.documentElement.outerHTML;
+            downloadTextFile(fileName, html);
+        });
+
+        $("#btnReset").addEventListener("click", () => {
+            // значения по вашему образцу из PDF: номер полиса/договора/страхователь и т.д.
+            // (вы можете поменять их под себя)
+            $("#inpPolicyNo").value = "EGID 0539356";
+            $("#inpContractNo").value = "GTS 0044394";
+            syncBinds();
+
+            // базовые поля
+            const set = (id, val) => {
+                const el = document.querySelector(`[data-id="${id}"]`);
+                if (el) el.textContent = val;
+            };
+            set("policyholder", "Crystal Bay Viet Nam");
+            set("contact", "+998908300099");
+            set("p1_name", "1. KHAMIDULLAEV FAYZULLO");
+            set("p2_name", "2. KHAMIDULLAEV NURILLO");
+            set("p1_dob", "12.12.2003");
+            set("p2_dob", "05.07.2007");
+            set("p1_pass", "FA 8755637");
+            set("p2_pass", "FA 5973018");
+            set("territory", "Vietnam");
+            set("period", "c 16.12.2025 до 24.12.2025");
+            set("days", "9");
+            set("medical", "30 000 EUR");
+            set("medTrans", "33 500 EUR");
+            set("accident", "1 500 EUR");
+            set("total", "65 000 EUR");
+            set("program", "GRAND 2");
+            set("special", "Travel");
+            set("premium", "Paid in full");
+            set("site", "ersp.e-osgo.uz");
+            set("issueDate", "12.12.2025 11:12");
+            set("checkText", "Проверьте действительность\nдоговора / Check contract validity");
+            set("qrCenterTitle", "Полис страхования путешествующих / Travel insurance policy");
+
+            // картинки обратно в плейсхолдеры
+            $("#imgLogo").src = placeholderLogo;
+            $("#imgQrCenter").src = placeholderQR;
+            $("#imgQrRight").src = placeholderQR;
+        });
+
+        $("#inpLogo").addEventListener("change", async (e) => {
+            const f = e.target.files?.[0];
+            if (!f) return;
+            $("#imgLogo").src = await readFileAsDataURL(f);
+        });
+
+        $("#inpQrCenter").addEventListener("change", async (e) => {
+            const f = e.target.files?.[0];
+            if (!f) return;
+            $("#imgQrCenter").src = await readFileAsDataURL(f);
+        });
+
+        $("#inpQrRight").addEventListener("change", async (e) => {
+            const f = e.target.files?.[0];
+            if (!f) return;
+            $("#imgQrRight").src = await readFileAsDataURL(f);
+        });
+
+        // при старте
+        syncBinds();
+    </script>
+</body>
+</html>
